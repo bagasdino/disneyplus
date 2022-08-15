@@ -1,6 +1,8 @@
 import 'package:disneyplus/model/recentlywatch.dart';
 import 'package:flutter/material.dart';
 
+import 'model/DownloadButton.dart';
+import 'model/PlayButton.dart';
 import 'model/actionfilm.dart';
 
 class DetailFilm extends StatelessWidget {
@@ -220,72 +222,3 @@ class DetailFilm extends StatelessWidget {
   }
 }
 
-class PlayButton extends StatefulWidget {
-  @override
-  _PlayButtonState createState() => _PlayButtonState();
-}
-
-class _PlayButtonState extends State<PlayButton> {
-  bool isPlay = true;
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-          primary: Colors.white12
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-              isPlay ? 'Play' : 'Pause'),
-          SizedBox(width: 5,),
-          Icon( // <-- Icon
-            isPlay ? Icons.play_arrow : Icons.pause,
-            size: 18.0,
-          ),
-        ],
-      ),
-      onPressed: () {
-        setState(() {
-          isPlay = !isPlay;
-        });
-      },
-    );
-  }
-}
-
-class DownloadButton extends StatefulWidget {
-  @override
-  _DownloadButtonState createState() => _DownloadButtonState();
-}
-
-class _DownloadButtonState extends State<DownloadButton> {
-  bool isDownload= true;
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-          primary: Colors.white12
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text('Download'),
-          SizedBox(width: 5,),
-          Icon( // <-- Icon
-            isDownload ? Icons.download : Icons.download_done,
-            color: isDownload ? Colors.white70 :  Colors.green ,
-            size: 18.0,
-                      ),
-        ],
-      ),
-      onPressed: () {
-        setState(() {
-          isDownload = !isDownload;
-        });
-      },
-    );
-  }
-}
