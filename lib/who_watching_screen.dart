@@ -13,61 +13,70 @@ class WhoWatching extends StatelessWidget {
     return Scaffold(
       body: Container(
         color: Colors.black,
-        //padding: const EdgeInsets.only(top: 100),
-        child: SafeArea(
-          child:  Column(
-            children: <Widget>[
-              const Text('Who'+"'"+'s watching?',
-                style: TextStyle(
-                    fontSize: 40,
-                    fontFamily: 'SFProDisplay',
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
-              ),
-              Container(
-                height: orientation == Orientation.portrait ? 500 : 150,
-                width:  orientation == Orientation.portrait ? double.infinity : double.infinity,
-                alignment: Alignment.center,
-                margin: orientation == Orientation.portrait ? const EdgeInsets.only(bottom: 180) : const EdgeInsets.only(bottom: 50),
-                child: ListView.builder(
-                  scrollDirection: orientation == Orientation.portrait ? Axis.vertical : Axis.horizontal,
-                  padding: orientation == Orientation.portrait ? EdgeInsets.only(top: 100) : EdgeInsets.only(top: 20),
+        padding: const EdgeInsets.only(top: 40),
+       child: Stack(
+         children: <Widget>[
+           Align(
+             alignment: Alignment.topCenter,
+             child: Padding(
+               padding: const EdgeInsets.all(5),
+               child: Text('Who'+"'"+'s watching?',
+                 style: TextStyle(
+                     fontSize: 40,
+                     fontFamily: 'SFProDisplay',
+                     color: Colors.white,
+                     fontWeight: FontWeight.bold),
+               ),
+             ),
+           ),
+           Align(
+             alignment: Alignment.center,
+             child: Padding(
+               padding: const EdgeInsets.all(5),
+               child: ListView.builder(
+                scrollDirection: orientation == Orientation.portrait ? Axis.vertical : Axis.horizontal,
+                 padding: orientation == Orientation.portrait ? EdgeInsets.only(top: 100) : EdgeInsets.only(top: 20),
                   itemBuilder: (context, index) {
-                    final WhoWatch who = whoWatchList[index];
+                  final WhoWatch who = whoWatchList[index];
                     return InkWell(
                       onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) {
-                          return MenuScreen(who: who);
-                        }));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) {
+                        return MenuScreen(who: who);
+                      }));
                       },
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          CircleAvatar(
+                          children: <Widget>[
+                            CircleAvatar(
                             backgroundImage:
                             NetworkImage(who.photo),
                             radius: 40,
-                          ),
+                            ),
                           SizedBox(height: 5),
-                          Text(
-                            who.name,
-                            style: TextStyle(fontSize: 16.0, color: Colors.white70, fontFamily: 'SFProDisplayMedium'),
-                          ),
-                          SizedBox(height: 15),
+                        Text(
+                              who.name,
+                              style: TextStyle(fontSize: 16.0, color: Colors.white70, fontFamily: 'SFProDisplayMedium'),
+                              ), SizedBox(height: 15),
                         ],
                       ),
                     );
-                  },
-                  itemCount: whoWatchList.length,
-                ),
+                    },
+                itemCount: whoWatchList.length,
               ),
-              Image.asset('images/disneyhitam.png',
-                  width: 120),
-            ],
+            ),
+           ),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: Padding(
+            padding: const EdgeInsets.all(5),
+          child:    Image.asset('images/disneyhitam.png',
+            width: 120),
           ),
-        )
-      ),
+        ),
+      ]
+    ),
+    ),
     );
   }
 }
